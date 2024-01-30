@@ -27,3 +27,8 @@
 .navbar-link:hover {
   color: var(--primary);
 }
+
+.img-logo {
+  width: 300px;
+  margin: 0.2em;
+}

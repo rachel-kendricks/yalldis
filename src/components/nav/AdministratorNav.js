@@ -9,7 +9,11 @@ export const AdministratorNav = () => {
       <li>
         <Link to="/">
           {" "}
-          <img src="./images/Y’alldis_logo.png" alt="yalldis logo" />
+          <img
+            src="./images/Y’alldis_logo.png"
+            alt="yalldis logo"
+            className="img-logo"
+          />
         </Link>
       </li>
       <li className="navbar-item">
