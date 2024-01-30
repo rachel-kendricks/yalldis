@@ -20,7 +20,10 @@ export const AdministratorViews = ({ currentUser }) => {
         }
       >
         <Route index element={<Welcome />} />
-        <Route path="grocerylist" element={<GroceryList />} />
+        <Route
+          path="grocerylist"
+          element={<GroceryList currentUser={currentUser} />}
+        />
         <Route path="/recipes">
           <Route index element={<Recipes />} />
           <Route path=":recipeId" element={<RecipeDetails />}>
