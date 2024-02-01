@@ -1,39 +1,69 @@
 import { useEffect, useState } from "react";
-import {
-  deleteUserRecipe,
-  getUserRecipesById,
-} from "../services/userRecipesService";
+import { deleteUserRecipe } from "../services/userRecipesService";
 import { useNavigate } from "react-router-dom";
-import { getIngredientsByRecipeId } from "../services/recipeIngredientsService";
+import { getRecipes } from "../services/recipeService";
+import { getIngredients } from "../services/ingredientsService";
 
 export const GroceryList = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [groceryListIngredients, setGroceryListIngredients] = useState([]);
   const navigate = useNavigate();
 
-  const getAndSetRecipesByUserId = () => {
-    getUserRecipesById(currentUser.id).then((recipes) => {
-      setRecipes(recipes);
+  const getAndSetRecipes = () => {
+    getRecipes().then((theRecipes) => {
+      const userRecipes = theRecipes.filter(
+        (recipe) => recipe.userRecipes[0]?.userId === currentUser.id
+      );
+      setRecipes(userRecipes);
     });
   };
 
   const getAndSetIngredients = () => {
-    let ingredientsArr = [];
-    recipes.map((recipe) => {
-      getIngredientsByRecipeId(recipe.recipeId).then((theIngredients) => {
-        ingredientsArr.push(...theIngredients);
-      });
+    getIngredients().then((ingredients) => {
+      setIngredients(ingredients);
     });
-    setIngredients(ingredientsArr);
+  };
+
+  const getAndSetGroceryListIngredients = () => {
+    let ingredientsArr = [];
+    console.log("recipes:");
+    console.log(recipes);
+    console.log("ingredients:");
+    console.log(ingredients);
+    for (const ingredient of ingredients) {
+      console.log("ingredient:");
+      console.log(ingredient);
+      for (const recipeObj of recipes) {
+        let recipeIngredients = recipeObj.recipeIngredients;
+        console.log("recipe ingredients:");
+        console.log(recipeIngredients);
+        for (const recipeIngredient of recipeIngredients) {
+          console.log("single ingredient:");
+          console.log(recipeIngredient);
+          if (ingredient.id === recipeIngredient.ingredientId) {
+            ingredientsArr.push(ingredient);
+          }
+        }
+      }
+    }
+    setGroceryListIngredients(ingredientsArr);
   };
 
   useEffect(() => {
-    getAndSetRecipesByUserId();
-  }, [currentUser]);
+    getAndSetRecipes();
+    console.log("getAndSetRecipes()");
+  }, []);
 
   useEffect(() => {
     getAndSetIngredients();
-  }, [recipes]);
+    console.log("getAndSetIngredients()");
+  }, []); //recipes
+
+  useEffect(() => {
+    getAndSetGroceryListIngredients();
+    console.log("getAndSetGroceryListIngredients()");
+  }, [recipes, ingredients]);
 
   return (
     <div>
@@ -41,9 +71,8 @@ export const GroceryList = ({ currentUser }) => {
         <h2>My Grocery List</h2>
         <div>
           <ul>
-            {ingredients.map((ingredient) => {
-              console.log(ingredient.ingredient.name);
-              return <li key={ingredient.id}>{ingredient.ingredient.name}</li>;
+            {groceryListIngredients.map((ingredient) => {
+              return <li key={ingredient.id}>{ingredient.name}</li>;
             })}
           </ul>
         </div>
@@ -53,14 +82,13 @@ export const GroceryList = ({ currentUser }) => {
         <div>
           <ul>
             {recipes.map((recipe) => {
-              console.log(recipe.recipe.title);
               return (
                 <li key={recipe.id}>
-                  {recipe.recipe.title}
+                  {recipe.title}
                   <button
                     onClick={() => {
                       deleteUserRecipe(recipe.id);
-                      getAndSetRecipesByUserId();
+                      getAndSetRecipes();
                     }}
                   >
                     Delete

@@ -6,6 +6,7 @@ import { Recipes } from "../Recipes/Recipes";
 import { RecipeDetails } from "../Recipes/RecipeDetails";
 import { EditRecipe } from "../Recipes/EditRecipe";
 import { Profile } from "../Profile/Profile";
+import { AddRecipe } from "../Recipes/AddRecipe";
 
 export const AdministratorViews = ({ currentUser }) => {
   return (
@@ -31,6 +32,7 @@ export const AdministratorViews = ({ currentUser }) => {
           </Route>
         </Route>
         <Route path="editrecipe" element={<EditRecipe />} />
+        <Route path="addrecipe" element={<AddRecipe />} />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
