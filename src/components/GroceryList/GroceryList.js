@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { deleteUserRecipe } from "../services/userRecipesService";
+import {
+  deleteUserRecipe,
+  getUserRecipes,
+  getUserRecipesById,
+} from "../services/userRecipesService";
 import { useNavigate } from "react-router-dom";
 import { getRecipes } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
@@ -7,15 +11,24 @@ import { getIngredients } from "../services/ingredientsService";
 export const GroceryList = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([]);
   const [ingredients, setIngredients] = useState([]);
+  const [userRecipes, setUserRecipes] = useState([]);
   const [groceryListIngredients, setGroceryListIngredients] = useState([]);
   const navigate = useNavigate();
 
   const getAndSetRecipes = () => {
-    getRecipes().then((theRecipes) => {
-      const userRecipes = theRecipes.filter(
-        (recipe) => recipe.userRecipes[0]?.userId === currentUser.id
-      );
-      setRecipes(userRecipes);
+    const recipesArr = [];
+    const allRecipes = getRecipes().then((theRecipes) => {
+      for (const recipe of theRecipes) {
+        for (const userRecipe of userRecipes) {
+          if (
+            recipe.id === userRecipe.recipeId &&
+            currentUser.id === userRecipe.userId
+          ) {
+            recipesArr.push(recipe);
+          }
+        }
+      }
+      setRecipes(recipesArr);
     });
   };
 
@@ -25,45 +38,52 @@ export const GroceryList = ({ currentUser }) => {
     });
   };
 
+  const getAndSetUserRecipes = () => {
+    getUserRecipes().then((theUserRecipes) => {
+      setUserRecipes(theUserRecipes);
+    });
+  };
+
   const getAndSetGroceryListIngredients = () => {
     let ingredientsArr = [];
-    console.log("recipes:");
-    console.log(recipes);
-    console.log("ingredients:");
-    console.log(ingredients);
+
     for (const ingredient of ingredients) {
-      console.log("ingredient:");
-      console.log(ingredient);
       for (const recipeObj of recipes) {
         let recipeIngredients = recipeObj.recipeIngredients;
-        console.log("recipe ingredients:");
-        console.log(recipeIngredients);
+
         for (const recipeIngredient of recipeIngredients) {
-          console.log("single ingredient:");
-          console.log(recipeIngredient);
           if (ingredient.id === recipeIngredient.ingredientId) {
             ingredientsArr.push(ingredient);
           }
         }
       }
     }
-    setGroceryListIngredients(ingredientsArr);
+    console.log(ingredientsArr);
+
+    //rewrite this code******
+    const uniqueItemsArray = ingredientsArr.filter((item, index, self) => {
+      // Check if the item's id is the first occurrence in the array
+      return index === self.findIndex((t) => t.id === item.id);
+    });
+
+    setGroceryListIngredients(uniqueItemsArray);
   };
 
   useEffect(() => {
     getAndSetRecipes();
-    console.log("getAndSetRecipes()");
-  }, []);
+  }, [userRecipes]);
 
   useEffect(() => {
     getAndSetIngredients();
-    console.log("getAndSetIngredients()");
-  }, []); //recipes
+  }, []);
+
+  useEffect(() => {
+    getAndSetUserRecipes();
+  }, []);
 
   useEffect(() => {
     getAndSetGroceryListIngredients();
-    console.log("getAndSetGroceryListIngredients()");
-  }, [recipes, ingredients]);
+  }, [recipes, ingredients, userRecipes]);
 
   return (
     <div>
@@ -86,9 +106,14 @@ export const GroceryList = ({ currentUser }) => {
                 <li key={recipe.id}>
                   {recipe.title}
                   <button
-                    onClick={() => {
-                      deleteUserRecipe(recipe.id);
-                      getAndSetRecipes();
+                    onClick={(event) => {
+                      const userRecipeToDelete = userRecipes.find(
+                        (userRecipe) =>
+                          userRecipe.userId === currentUser.id &&
+                          userRecipe.recipeId === recipe.id
+                      );
+                      deleteUserRecipe(userRecipeToDelete?.id);
+                      getAndSetUserRecipes();
                     }}
                   >
                     Delete
