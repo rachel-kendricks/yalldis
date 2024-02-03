@@ -3,9 +3,9 @@ import { getRecipes } from "../services/recipeService";
 import { Link } from "react-router-dom";
 import { getMealTypes } from "../services/mealTypeService";
 
-export const Recipes = () => {
+export const Recipes = ({ mealTypes }) => {
   const [allRecipes, setAllRecipes] = useState([]);
-  const [mealTypes, setMealTypes] = useState([]);
+  // const [mealTypes, setMealTypes] = useState([]);
   const [filteredMealType, setFilteredMealType] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -16,18 +16,19 @@ export const Recipes = () => {
     });
   };
 
-  const getAndSetMealTypes = () => {
-    getMealTypes().then((theMealTypes) => {
-      setMealTypes(theMealTypes);
-    });
-  };
+  // const getAndSetMealTypes = () => {
+  //   getMealTypes().then((theMealTypes) => {
+  //     setMealTypes(theMealTypes);
+  //   });
+  // };
+
   useEffect(() => {
     getAndSetAllRecipes();
   }, []);
 
-  useEffect(() => {
-    getAndSetMealTypes();
-  }, []);
+  // useEffect(() => {
+  //   getAndSetMealTypes();
+  // }, []);
 
   useEffect(() => {
     const recipesWithSelectedMealType = allRecipes.filter((recipe) =>

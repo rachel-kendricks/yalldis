@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { AdministratorViews } from "./AdministratorViews";
 import { UserViews } from "./UserViews";
 import { getIngredients } from "../services/ingredientsService";
+import { getMealTypes } from "../services/mealTypeService";
 
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [mealTypes, setMealTypes] = useState([]);
 
   const getAndSetIngredients = () => {
     getIngredients().then((ingredients) => {
@@ -13,10 +15,20 @@ export const ApplicationViews = () => {
     });
   };
 
+  const getAndSetMealTypes = () => {
+    getMealTypes().then((theMealTypes) => {
+      setMealTypes(theMealTypes);
+    });
+  };
+
   useEffect(() => {
     getAndSetIngredients();
     console.log("getAndSetIngredients()");
   }, []); //recipes
+
+  useEffect(() => {
+    getAndSetMealTypes();
+  }, []);
 
   useEffect(() => {
     const localYalldisUser = localStorage.getItem("yalldis_user");
@@ -29,6 +41,7 @@ export const ApplicationViews = () => {
       currentUser={currentUser}
       ingredients={ingredients}
       setIngredients={setIngredients}
+      mealTypes={mealTypes}
     />
   ) : (
     <UserViews currentUser={currentUser} />

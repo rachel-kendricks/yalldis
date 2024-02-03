@@ -12,6 +12,7 @@ export const AdministratorViews = ({
   currentUser,
   ingredients,
   setIngredients,
+  mealTypes,
 }) => {
   return (
     <Routes>
@@ -30,7 +31,7 @@ export const AdministratorViews = ({
           element={<GroceryList currentUser={currentUser} />}
         />
         <Route path="/recipes">
-          <Route index element={<Recipes />} />
+          <Route index element={<Recipes mealTypes={mealTypes} />} />
           <Route
             path=":recipeId"
             element={
@@ -40,9 +41,15 @@ export const AdministratorViews = ({
               />
             }
           />
+          <Route path=":recipeId/editrecipe" element={<EditRecipe />} />
         </Route>
-        <Route path="editrecipe" element={<EditRecipe />} />
-        <Route path="addrecipe" element={<AddRecipe />} />
+        {/* <Route path="editrecipe" element={<EditRecipe />} /> */}
+        <Route
+          path="addrecipe"
+          element={
+            <AddRecipe ingredients={ingredients} mealTypes={mealTypes} />
+          }
+        />
         <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
