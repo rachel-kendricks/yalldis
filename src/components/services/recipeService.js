@@ -9,3 +9,13 @@ export const getRecipeById = (id) => {
     `http://localhost:8088/recipes?id=${id}&_embed=recipeIngredients`
   ).then((res) => res.json());
 };
+
+export const postRecipe = (newRecipe) => {
+  return fetch(`http://localhost:8088/recipes`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newRecipe),
+  });
+};

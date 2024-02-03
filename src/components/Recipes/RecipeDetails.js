@@ -75,7 +75,7 @@ export const RecipeDetails = ({ currentUser, ingredients }) => {
 
         <button
           onClick={() => {
-            navigate("/editRecipe");
+            navigate(`/recipes/${recipeId}/editrecipe`);
           }}
         >
           Edit Recipe
