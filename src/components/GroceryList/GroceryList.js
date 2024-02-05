@@ -15,6 +15,8 @@ export const GroceryList = ({ currentUser }) => {
   const [groceryListIngredients, setGroceryListIngredients] = useState([]);
   const navigate = useNavigate();
 
+  //testing branches!
+
   const getAndSetRecipes = () => {
     const recipesArr = [];
     const allRecipes = getRecipes().then((theRecipes) => {
