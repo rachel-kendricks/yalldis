@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { postRecipe } from "../services/recipeService";
+import { useNavigate } from "react-router-dom";
 
 export const AddRecipe = ({ ingredients, mealTypes }) => {
   const [title, setTitle] = useState("");
@@ -10,6 +11,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
   const [searchIngredients, setSearchIngredients] = useState("");
   const [filteredIngredients, setFilteredIngredients] = useState([]);
   const [addedIngredients, setAddedIngredients] = useState([]);
+  const navigate = useNavigate();
 
   const addIngredient = (ingredient) => {
     setAddedIngredients((prevIngredients) => [...prevIngredients, ingredient]);
@@ -48,6 +50,9 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
           });
         });
         return Promise.all(promises);
+      })
+      .then(() => {
+        navigate("/recipes");
       });
   };
 
@@ -66,54 +71,76 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
         <h1>Add Recipe Info: </h1>
       </section>
       <section>
-        <input
-          type="text"
-          placeholder="Enter Title"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-        />
-        <select
-          id="resource"
-          onChange={(event) => {
-            const mealTypeText = event.target.value;
-
-            const mealTypeObj = mealTypes.find(
-              (type) => type.name === mealTypeText
-            );
-
-            setMealTypeId(mealTypeObj.id);
-          }}
-        >
-          <option value="0">Select Meal Type...</option>
-          {mealTypes.map((type) => {
-            return <option key={type.id}>{type.name}</option>;
-          })}
-        </select>
-        <input
-          type="text"
-          placeholder="Enter Image URL"
-          onChange={(event) => {
-            setImgURL(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Enter Description"
-          onChange={(event) => {
-            setDescription(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Enter Directions"
-          onChange={(event) => {
-            setDirections(event.target.value);
-          }}
-        />
         <div>
+          <h4>Title:</h4>
           <input
             type="text"
+            required
+            placeholder="Enter Title"
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>Meal Type:</h4>
+          <select
+            id="resource"
+            required
+            onChange={(event) => {
+              const mealTypeText = event.target.value;
+
+              const mealTypeObj = mealTypes.find(
+                (type) => type.name === mealTypeText
+              );
+
+              setMealTypeId(mealTypeObj.id);
+            }}
+          >
+            <option value="0">Select Meal Type...</option>
+            {mealTypes.map((type) => {
+              return <option key={type.id}>{type.name}</option>;
+            })}
+          </select>
+        </div>
+        <div>
+          <h4>Image URL (Copy Image Address):</h4>
+          <input
+            type="text"
+            required
+            placeholder="Enter Image URL"
+            onChange={(event) => {
+              setImgURL(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>Description:</h4>
+          <input
+            type="text"
+            required
+            placeholder="Enter Description"
+            onChange={(event) => {
+              setDescription(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>Directions:</h4>
+          <input
+            type="text"
+            required
+            placeholder="Enter Directions"
+            onChange={(event) => {
+              setDirections(event.target.value);
+            }}
+          />
+        </div>
+        <div>
+          <h4>Ingredients:</h4>
+          <input
+            type="text"
+            required
             placeholder="Search Ingredients"
             onChange={(event) => {
               setSearchIngredients(event.target.value);

@@ -13,3 +13,17 @@ export const createUser = (customer) => {
     body: JSON.stringify(customer),
   }).then((res) => res.json());
 };
+
+export const getUserById = (id) => {
+  return fetch(`http://localhost:8088/users/${id}`).then((res) => res.json());
+};
+
+export const updateUser = (editedCurrentUser) => {
+  return fetch(`http://localhost:8088/users/${editedCurrentUser.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editedCurrentUser),
+  });
+};
