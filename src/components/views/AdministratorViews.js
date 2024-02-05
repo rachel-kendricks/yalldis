@@ -41,7 +41,16 @@ export const AdministratorViews = ({
               />
             }
           />
-          <Route path=":recipeId/editrecipe" element={<EditRecipe />} />
+          <Route
+            path=":recipeId/editrecipe"
+            element={
+              <EditRecipe
+                ingredients={ingredients}
+                currentUser={currentUser}
+                mealTypes={mealTypes}
+              />
+            }
+          />
         </Route>
         {/* <Route path="editrecipe" element={<EditRecipe />} /> */}
         <Route
@@ -50,7 +59,7 @@ export const AdministratorViews = ({
             <AddRecipe ingredients={ingredients} mealTypes={mealTypes} />
           }
         />
-        <Route path="profile" element={<Profile />} />
+        <Route path="profile" element={<Profile currentUser={currentUser} />} />
       </Route>
     </Routes>
   );
