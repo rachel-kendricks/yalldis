@@ -49,7 +49,7 @@ export const Register = (props) => {
   return (
     <main style={{ textAlign: "center" }}>
       <form className="form-login" onSubmit={handleRegister}>
-        <h1>Honey Rae Repairs</h1>
+        <h1>Y'ALLDIS</h1>
         <h2>Please Register</h2>
         <fieldset>
           <div className="form-group">
