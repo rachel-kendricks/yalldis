@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getRecipeById } from "../services/recipeService";
-import { getIngredientsByRecipeId } from "../services/recipeIngredientsService";
+import { useNavigate } from "react-router-dom";
+import {
+  deleteRecipe,
+  getRecipeById,
+  updateRecipe,
+} from "../services/recipeService";
+import {
+  addIngredientsToDatabase,
+  removeIngredientsFromDatabase,
+} from "../services/recipeIngredientsService";
 
 export const EditRecipe = ({
   ingredients,
@@ -17,6 +24,7 @@ export const EditRecipe = ({
   const [addedIngredients, setAddedIngredients] = useState([
     ...recipeIngredients,
   ]);
+  const navigate = useNavigate();
 
   const getRecipe = (recipeId) => {
     getRecipeById(recipeId).then((recipe) => {
@@ -33,46 +41,47 @@ export const EditRecipe = ({
     const updatedRecipe = {
       title: recipe.title,
       mealTypeId: recipe.mealTypeId,
-      instructions: recipe.directions,
+      instructions: recipe.instructions,
       description: recipe.description,
       image: recipe.image,
       id: recipe.id,
     };
 
-    fetch(`http://localhost:8088/recipes/${recipeId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedRecipe),
-    });
+    updateRecipe(recipe.id, updatedRecipe);
 
-    if (recipeIngredients.length > addedIngredients.length) {
-      //determine the unique ingredients and DELETE from database
-    } else if (addedIngredients.length > recipeIngredients) {
-      //determine the unique ingredients and POST to database
-    } else if (recipeIngredients.length === addedIngredients.length) {
-      //do nothing
+    //determine which ingredients have been added/removed when the recipe is edited
+    const ingredientsRemoved = recipeIngredients.filter(
+      (recipeIngredient) =>
+        !addedIngredients.some(
+          (addedIngredient) => addedIngredient.id === recipeIngredient.id
+        )
+    );
+    console.log("Removed Ingredients:", ingredientsRemoved);
+
+    const ingredientsAdded = addedIngredients.filter(
+      (addedIngredient) =>
+        !recipeIngredients.some(
+          (recipeIngredient) => recipeIngredient.id === addedIngredient.id
+        )
+    );
+    console.log("Added Ingredients:", ingredientsAdded);
+
+    //post/delete from database
+    if (ingredientsRemoved.length > 0 && ingredientsAdded.length > 0) {
+      removeIngredientsFromDatabase(
+        ingredientsRemoved,
+        recipeIngredientIds
+      ).then(() => {
+        addIngredientsToDatabase(ingredientsAdded, recipe);
+      });
+    } else if (ingredientsRemoved.length > 0) {
+      removeIngredientsFromDatabase(ingredientsRemoved, recipeIngredientIds);
+    } else if (ingredientsAdded.length > 0) {
+      addIngredientsToDatabase(ingredientsAdded, recipe);
     }
+    window.alert("Recipe Updated!");
+    navigate("/recipes");
   };
-
-  //   const promises = addedIngredients.map((ingredient) => {
-  //     return fetch(
-  //       `http://localhost:8088/recipeIngredients?recipeId=${recipe.id}`,
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           recipeId: recipe.id,
-  //           ingredientId: ingredient.id,
-  //         }),
-  //       }
-  //     );
-  //   });
-  //   return Promise.all(promises);
-  // };
 
   useEffect(() => {
     getRecipe(recipeId);
@@ -239,7 +248,15 @@ export const EditRecipe = ({
       </section>
       <section>
         <button onClick={handleUpdateRecipe}>Update Recipe</button>
-        <button>Delete Recipe</button>
+        <button
+          onClick={() => {
+            deleteRecipe(recipe.id);
+            window.alert("Recipe Deleted!");
+            navigate("/recipes");
+          }}
+        >
+          Delete Recipe
+        </button>
       </section>
     </div>
   );

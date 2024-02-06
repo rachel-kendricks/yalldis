@@ -63,7 +63,7 @@ export const RecipeDetails = ({
           <h3>Ingredients: </h3>
           <ul>
             {recipeIngredients.map((recipeIngredient) => {
-              return <li key={recipeId.id}>{recipeIngredient.name}</li>;
+              return <li key={recipeIngredient.id}>{recipeIngredient.name}</li>;
             })}
           </ul>
         </div>

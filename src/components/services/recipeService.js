@@ -19,3 +19,19 @@ export const postRecipe = (newRecipe) => {
     body: JSON.stringify(newRecipe),
   });
 };
+
+export const updateRecipe = (recipeId, updatedRecipe) => {
+  return fetch(`http://localhost:8088/recipes/${recipeId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedRecipe),
+  });
+};
+
+export const deleteRecipe = (id) => {
+  return fetch(`http://localhost:8088/recipes/${id}`, {
+    method: "DELETE",
+  });
+};
