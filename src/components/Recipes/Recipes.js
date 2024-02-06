@@ -3,7 +3,7 @@ import { getRecipes } from "../services/recipeService";
 import { Link } from "react-router-dom";
 import { getMealTypes } from "../services/mealTypeService";
 
-export const Recipes = ({ mealTypes }) => {
+export const Recipes = ({ mealTypes, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
   // const [mealTypes, setMealTypes] = useState([]);
   const [filteredMealType, setFilteredMealType] = useState([]);
@@ -16,19 +16,9 @@ export const Recipes = ({ mealTypes }) => {
     });
   };
 
-  // const getAndSetMealTypes = () => {
-  //   getMealTypes().then((theMealTypes) => {
-  //     setMealTypes(theMealTypes);
-  //   });
-  // };
-
   useEffect(() => {
     getAndSetAllRecipes();
   }, []);
-
-  // useEffect(() => {
-  //   getAndSetMealTypes();
-  // }, []);
 
   useEffect(() => {
     const recipesWithSelectedMealType = allRecipes.filter((recipe) =>
@@ -96,9 +86,13 @@ export const Recipes = ({ mealTypes }) => {
         </div>
       </section>
       <section>
-        <Link to={`/addrecipe`}>
-          <button>Add New Recipe</button>
-        </Link>
+        {currentUser.isAdministrator ? (
+          <Link to={`/addrecipe`}>
+            <button>Add New Recipe</button>
+          </Link>
+        ) : (
+          ""
+        )}
       </section>
     </div>
   );

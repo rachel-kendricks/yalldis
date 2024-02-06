@@ -37,14 +37,17 @@ export const RecipeDetails = ({
           {" "}
           <button onClick={handleAddToMyList}>Add to My List</button>
         </div>
-
-        <button
-          onClick={() => {
-            navigate(`/recipes/${recipeId}/editrecipe`);
-          }}
-        >
-          Edit Recipe
-        </button>
+        {currentUser.isAdministrator ? (
+          <button
+            onClick={() => {
+              navigate(`/recipes/${recipeId}/editrecipe`);
+            }}
+          >
+            Edit Recipe
+          </button>
+        ) : (
+          ""
+        )}
       </section>
       <section>
         <img src={recipe.image} alt={recipe.title} />

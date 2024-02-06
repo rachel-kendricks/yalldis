@@ -40,10 +40,13 @@ export const ApplicationViews = () => {
     <AdministratorViews
       currentUser={currentUser}
       ingredients={ingredients}
-      setIngredients={setIngredients}
       mealTypes={mealTypes}
     />
   ) : (
-    <UserViews currentUser={currentUser} />
+    <UserViews
+      currentUser={currentUser}
+      ingredients={ingredients}
+      mealTypes={mealTypes}
+    />
   );
 };
