@@ -3,11 +3,20 @@ import { useParams } from "react-router-dom";
 import { getRecipeById } from "../services/recipeService";
 import { getIngredientsByRecipeId } from "../services/recipeIngredientsService";
 
-export const EditRecipe = ({ ingredients, mealTypes }) => {
-  const { recipeId } = useParams();
+export const EditRecipe = ({
+  ingredients,
+  mealTypes,
+  recipeId,
+  recipeIngredients,
+  recipeIngredientIds,
+}) => {
   const [recipe, setRecipe] = useState({});
   const [mealTypeName, setMealTypeName] = useState("");
-  const [addedIngredients, setAddedIngredients] = useState([]);
+  const [filteredIngredients, setFilteredIngredients] = useState([]);
+  const [searchIngredients, setSearchIngredients] = useState("");
+  const [addedIngredients, setAddedIngredients] = useState([
+    ...recipeIngredients,
+  ]);
 
   const getRecipe = (recipeId) => {
     getRecipeById(recipeId).then((recipe) => {
@@ -16,19 +25,57 @@ export const EditRecipe = ({ ingredients, mealTypes }) => {
     });
   };
 
-  const getAndSetAddedIngredients = () => {
-    getIngredientsByRecipeId(recipeId).then((ingredients) => {
-      setAddedIngredients(ingredients);
-      console.log(ingredients);
-    });
+  const addIngredient = (ingredient) => {
+    setAddedIngredients((prevIngredients) => [...prevIngredients, ingredient]);
   };
+
+  const handleUpdateRecipe = () => {
+    const updatedRecipe = {
+      title: recipe.title,
+      mealTypeId: recipe.mealTypeId,
+      instructions: recipe.directions,
+      description: recipe.description,
+      image: recipe.image,
+      id: recipe.id,
+    };
+
+    fetch(`http://localhost:8088/recipes/${recipeId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedRecipe),
+    });
+
+    if (recipeIngredients.length > addedIngredients.length) {
+      //determine the unique ingredients and DELETE from database
+    } else if (addedIngredients.length > recipeIngredients) {
+      //determine the unique ingredients and POST to database
+    } else if (recipeIngredients.length === addedIngredients.length) {
+      //do nothing
+    }
+  };
+
+  //   const promises = addedIngredients.map((ingredient) => {
+  //     return fetch(
+  //       `http://localhost:8088/recipeIngredients?recipeId=${recipe.id}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           recipeId: recipe.id,
+  //           ingredientId: ingredient.id,
+  //         }),
+  //       }
+  //     );
+  //   });
+  //   return Promise.all(promises);
+  // };
 
   useEffect(() => {
     getRecipe(recipeId);
-  }, [recipeId]);
-
-  useEffect(() => {
-    getAndSetAddedIngredients();
   }, [recipeId]);
 
   useEffect(() => {
@@ -36,6 +83,15 @@ export const EditRecipe = ({ ingredients, mealTypes }) => {
     const mealTypeObjName = mealTypeObj?.name;
     setMealTypeName(mealTypeObjName);
   }, [recipe]);
+
+  useEffect(() => {
+    if (searchIngredients !== "") {
+      const foundWords = ingredients.filter((ingredient) =>
+        ingredient.name.toLowerCase().includes(searchIngredients.toLowerCase())
+      );
+      setFilteredIngredients(foundWords);
+    }
+  }, [searchIngredients, ingredients]);
 
   return (
     <div>
@@ -130,7 +186,15 @@ export const EditRecipe = ({ ingredients, mealTypes }) => {
       </section>
       <section>
         <h4>Ingredients: </h4>
-        {/* <div>
+        <input
+          type="text"
+          required
+          placeholder="Search Ingredients"
+          onChange={(event) => {
+            setSearchIngredients(event.target.value);
+          }}
+        />
+        <div>
           <h4>Available Ingredients: </h4>
           <ul>
             {filteredIngredients.map((ingredient) => {
@@ -148,30 +212,34 @@ export const EditRecipe = ({ ingredients, mealTypes }) => {
               );
             })}
           </ul>
-        </div> */}
+        </div>
         <div>
           <h4>Added Ingredients: </h4>
           <ul>
             {addedIngredients.map((ingredient) => {
               return (
                 <li key={ingredient.id}>
-                  {ingredient.name}
-                  {/* <button
-                      onClick={() => {
-                        console.log(addedIngredients);
-                        const filteredArr = addedIngredients.filter(
-                          (item) => item.id !== ingredient.id
-                        );
-                        setAddedIngredients(filteredArr);
-                      }}
-                    >
-                      Delete
-                    </button> */}
+                  {ingredient.name}{" "}
+                  <button
+                    onClick={() => {
+                      console.log(addedIngredients);
+                      const filteredArr = addedIngredients.filter(
+                        (item) => item.id !== ingredient.id
+                      );
+                      setAddedIngredients(filteredArr);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </li>
               );
             })}
           </ul>
         </div>
+      </section>
+      <section>
+        <button onClick={handleUpdateRecipe}>Update Recipe</button>
+        <button>Delete Recipe</button>
       </section>
     </div>
   );

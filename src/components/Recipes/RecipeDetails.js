@@ -4,37 +4,15 @@ import { getRecipeById } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
 import { createUserRecipe } from "../services/userRecipesService";
 
-export const RecipeDetails = ({ currentUser, ingredients }) => {
-  const { recipeId } = useParams();
-  const [recipe, setRecipe] = useState({});
-  const [recipeIngredients, setRecipeIngredients] = useState([]);
-  const [recipeIngredientIds, setRecipeIngredientIds] = useState([]);
+export const RecipeDetails = ({
+  currentUser,
+  ingredients,
+  recipeId,
+  recipe,
+  recipeIngredients,
+  recipeIngredientIds,
+}) => {
   const navigate = useNavigate();
-
-  const getRecipe = (recipeId) => {
-    getRecipeById(recipeId).then((recipe) => {
-      const recipeObj = recipe[0];
-      setRecipe(recipeObj);
-      console.log("setRecipe()");
-    });
-  };
-
-  const getAndSetRecipeIngredients = () => {
-    console.log("recipeIngredientIds");
-    console.log(recipeIngredientIds);
-    if (recipeIngredientIds) {
-      const recipeIngredientArr = [];
-      const theRecipeIngredientIds = recipeIngredientIds;
-      for (const ingredient of ingredients) {
-        for (const obj of theRecipeIngredientIds) {
-          if (ingredient.id === obj.ingredientId) {
-            recipeIngredientArr.push(ingredient);
-          }
-        }
-      }
-      setRecipeIngredients(recipeIngredientArr);
-    }
-  };
 
   const handleAddToMyList = (event) => {
     event.preventDefault();
@@ -50,19 +28,6 @@ export const RecipeDetails = ({ currentUser, ingredients }) => {
     createUserRecipe(newUserRecipe);
     navigate("/grocerylist");
   };
-
-  useEffect(() => {
-    const theRecipeIngredients = recipe?.recipeIngredients;
-    setRecipeIngredientIds(theRecipeIngredients);
-  }, [recipe]);
-
-  useEffect(() => {
-    getRecipe(recipeId);
-  }, [recipeId]);
-
-  useEffect(() => {
-    getAndSetRecipeIngredients();
-  }, [recipeIngredientIds]);
 
   return (
     <div>
@@ -82,7 +47,10 @@ export const RecipeDetails = ({ currentUser, ingredients }) => {
         </button>
       </section>
       <section>
-        <img src={recipe.image} alt="spinach and tomato omelette" />
+        <img src={recipe.image} alt={recipe.title} />
+        <div>
+          <h3>{recipe.title}</h3>
+        </div>
         <div>
           <h3>Description:</h3>
           <p>{recipe.description}</p>
