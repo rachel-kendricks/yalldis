@@ -7,6 +7,7 @@ import { RecipeDetails } from "../Recipes/RecipeDetails";
 import { EditRecipe } from "../Recipes/EditRecipe";
 import { Profile } from "../Profile/Profile";
 import { AddRecipe } from "../Recipes/AddRecipe";
+import { RecipeViews } from "./RecipeViews";
 
 export const AdministratorViews = ({
   currentUser,
@@ -33,6 +34,16 @@ export const AdministratorViews = ({
         <Route path="/recipes">
           <Route index element={<Recipes mealTypes={mealTypes} />} />
           <Route
+            path=":recipeId/*"
+            element={
+              <RecipeViews
+                currentUser={currentUser}
+                ingredients={ingredients}
+                mealTypes={mealTypes}
+              />
+            }
+          />
+          {/* <Route
             path=":recipeId"
             element={
               <RecipeDetails
@@ -50,7 +61,7 @@ export const AdministratorViews = ({
                 mealTypes={mealTypes}
               />
             }
-          />
+          /> */}
         </Route>
         {/* <Route path="editrecipe" element={<EditRecipe />} /> */}
         <Route
