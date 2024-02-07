@@ -9,7 +9,7 @@ export const UserNav = () => {
       <li>
         <Link to="/">
           <img
-            src="../images/Y’alldis_logo.png"
+            src={process.env.PUBLIC_URL + "/images/Y’alldis_logo.png"}
             alt="yalldis logo"
             className="img-logo"
           />

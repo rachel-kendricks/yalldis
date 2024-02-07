@@ -4,7 +4,7 @@ import {
   getUserRecipes,
   getUserRecipesById,
 } from "../services/userRecipesService";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getRecipes } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
 
@@ -104,7 +104,7 @@ export const GroceryList = ({ currentUser }) => {
             {recipes.map((recipe) => {
               return (
                 <li key={recipe.id}>
-                  {recipe.title}
+                  <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
                   <button
                     onClick={(event) => {
                       const userRecipeToDelete = userRecipes.find(
