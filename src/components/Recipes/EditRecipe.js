@@ -94,6 +94,10 @@ export const EditRecipe = ({
   }, [recipe]);
 
   useEffect(() => {
+    setAddedIngredients(recipeIngredients);
+  }, [recipeIngredients]);
+
+  useEffect(() => {
     if (searchIngredients !== "") {
       const foundWords = ingredients.filter((ingredient) =>
         ingredient.name.toLowerCase().includes(searchIngredients.toLowerCase())
@@ -225,10 +229,10 @@ export const EditRecipe = ({
         <div>
           <h4>Added Ingredients: </h4>
           <ul>
-            {addedIngredients.map((ingredient) => {
+            {addedIngredients?.map((ingredient) => {
               return (
                 <li key={ingredient.id}>
-                  {ingredient.name}{" "}
+                  {ingredient.name}
                   <button
                     onClick={() => {
                       console.log(addedIngredients);
