@@ -7,6 +7,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { getRecipes } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { PDFFile } from "../PDF/PDFFile";
 
 export const GroceryList = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([]);
@@ -95,6 +97,22 @@ export const GroceryList = ({ currentUser }) => {
               return <li key={ingredient.id}>{ingredient.name}</li>;
             })}
           </ul>
+          <div>
+            <PDFDownloadLink
+              document={
+                <PDFFile groceryListIngredients={groceryListIngredients} />
+              }
+              fileName="My Grocery List"
+            >
+              {({ loading }) =>
+                loading ? (
+                  <button>Loading Document...</button>
+                ) : (
+                  <button>Download PDF</button>
+                )
+              }
+            </PDFDownloadLink>
+          </div>
         </div>
       </section>
       <section>
