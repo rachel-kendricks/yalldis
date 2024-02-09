@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getRecipeById } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
 import { createUserRecipe } from "../services/userRecipesService";
+import Button from "react-bootstrap/Button";
 
 export const RecipeDetails = ({
   currentUser,
@@ -35,16 +36,19 @@ export const RecipeDetails = ({
         <h1>Recipe Details</h1>
         <div>
           {" "}
-          <button onClick={handleAddToMyList}>Add to My List</button>
+          <Button variant="success" onClick={handleAddToMyList}>
+            Add to My List
+          </Button>
         </div>
         {currentUser.isAdministrator ? (
-          <button
+          <Button
+            variant="secondary"
             onClick={() => {
               navigate(`/recipes/${recipeId}/editrecipe`);
             }}
           >
             Edit Recipe
-          </button>
+          </Button>
         ) : (
           ""
         )}

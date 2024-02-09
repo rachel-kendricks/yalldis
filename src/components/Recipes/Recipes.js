@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getRecipes } from "../services/recipeService";
 import { Link } from "react-router-dom";
 import { getMealTypes } from "../services/mealTypeService";
+import Button from "react-bootstrap/Button";
 
 export const Recipes = ({ mealTypes, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
@@ -54,13 +55,14 @@ export const Recipes = ({ mealTypes, currentUser }) => {
           </select>
         </div>
         <div>
-          <button
+          <Button
+            variant="dark"
             onClick={() => {
               setFilteredRecipes(allRecipes);
             }}
           >
             Show All
-          </button>
+          </Button>
         </div>
         <div>
           <input
@@ -88,7 +90,7 @@ export const Recipes = ({ mealTypes, currentUser }) => {
       <section>
         {currentUser.isAdministrator ? (
           <Link to={`/addrecipe`}>
-            <button>Add New Recipe</button>
+            <Button variant="success">Add New Recipe</Button>
           </Link>
         ) : (
           ""

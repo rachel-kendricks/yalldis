@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getUserById, updateUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export const Profile = ({ currentUser }) => {
   const [currentUserInfo, setCurrentUserInfo] = useState({});
@@ -83,7 +84,9 @@ export const Profile = ({ currentUser }) => {
         </div>
       </section>
       <section>
-        <button onClick={handleUpdateProfile}>Update Profile</button>
+        <Button variant="dark" onClick={handleUpdateProfile}>
+          Update Profile
+        </Button>
       </section>
     </div>
   );

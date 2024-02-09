@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { postRecipe } from "../services/recipeService";
 import { useNavigate } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export const AddRecipe = ({ ingredients, mealTypes }) => {
   const [title, setTitle] = useState("");
@@ -153,13 +154,15 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
                 return (
                   <li key={ingredient.id}>
                     {ingredient.name}
-                    <button
+                    <Button
+                      variant="success"
+                      size="sm"
                       onClick={() => {
                         addIngredient(ingredient);
                       }}
                     >
-                      Add
-                    </button>
+                      <i class="fa-solid fa-plus"></i>
+                    </Button>
                   </li>
                 );
               })}
@@ -172,7 +175,9 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
                 return (
                   <li key={ingredient.id}>
                     {ingredient.name}
-                    <button
+                    <Button
+                      variant="secondary"
+                      size="sm"
                       onClick={() => {
                         console.log(addedIngredients);
                         const filteredArr = addedIngredients.filter(
@@ -181,8 +186,8 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
                         setAddedIngredients(filteredArr);
                       }}
                     >
-                      Delete
-                    </button>
+                      <i class="fa-solid fa-trash"></i>
+                    </Button>
                   </li>
                 );
               })}
@@ -191,7 +196,9 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
         </div>
       </section>
       <section>
-        <button onClick={handlePost}>Post Recipe</button>
+        <Button variant="dark" onClick={handlePost}>
+          Post Recipe
+        </Button>
       </section>
     </div>
   );

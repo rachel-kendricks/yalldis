@@ -9,6 +9,7 @@ import {
   addIngredientsToDatabase,
   removeIngredientsFromDatabase,
 } from "../services/recipeIngredientsService";
+import Button from "react-bootstrap/Button";
 
 export const EditRecipe = ({
   ingredients,
@@ -214,13 +215,15 @@ export const EditRecipe = ({
               return (
                 <li key={ingredient.id}>
                   {ingredient.name}
-                  <button
+                  <Button
+                    variant="success"
+                    size="sm"
                     onClick={() => {
                       addIngredient(ingredient);
                     }}
                   >
-                    Add
-                  </button>
+                    <i class="fa-solid fa-plus"></i>
+                  </Button>
                 </li>
               );
             })}
@@ -233,7 +236,9 @@ export const EditRecipe = ({
               return (
                 <li key={ingredient.id}>
                   {ingredient.name}
-                  <button
+                  <Button
+                    variant="secondary"
+                    size="sm"
                     onClick={() => {
                       console.log(addedIngredients);
                       const filteredArr = addedIngredients.filter(
@@ -242,8 +247,8 @@ export const EditRecipe = ({
                       setAddedIngredients(filteredArr);
                     }}
                   >
-                    Delete
-                  </button>
+                    <i class="fa-solid fa-trash"></i>
+                  </Button>
                 </li>
               );
             })}
@@ -251,8 +256,11 @@ export const EditRecipe = ({
         </div>
       </section>
       <section>
-        <button onClick={handleUpdateRecipe}>Update Recipe</button>
-        <button
+        <Button variant="dark" onClick={handleUpdateRecipe}>
+          Update Recipe
+        </Button>
+        <Button
+          variant="danger"
           onClick={() => {
             deleteRecipe(recipe.id);
             window.alert("Recipe Deleted!");
@@ -260,7 +268,7 @@ export const EditRecipe = ({
           }}
         >
           Delete Recipe
-        </button>
+        </Button>
       </section>
     </div>
   );
