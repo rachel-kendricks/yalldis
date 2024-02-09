@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
   display: flex;
   flex-wrap: nowrap;
   background-color: var(--dark);
@@ -26,9 +26,31 @@
 
 .navbar-link:hover {
   color: var(--primary);
-}
+} */
 
 .img-logo {
   width: 300px;
   margin: 0.2em;
+}
+
+.nav-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: var(--dark);
+  margin: 0;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.nav-item {
+  color: var(--offWhite);
+}
+
+.nav-item a:hover {
+  color: lightgrey;
+}
+
+.nav > .active > a {
+  color: red;
 }

@@ -9,6 +9,7 @@ import { getRecipes } from "../services/recipeService";
 import { getIngredients } from "../services/ingredientsService";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../PDF/PDFFile";
+import Button from "react-bootstrap/Button";
 
 export const GroceryList = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([]);
@@ -106,9 +107,9 @@ export const GroceryList = ({ currentUser }) => {
             >
               {({ loading }) =>
                 loading ? (
-                  <button>Loading Document...</button>
+                  <Button variant="dark">Loading Document...</Button>
                 ) : (
-                  <button>Download PDF</button>
+                  <Button variant="dark">Download PDF</Button>
                 )
               }
             </PDFDownloadLink>
@@ -123,7 +124,9 @@ export const GroceryList = ({ currentUser }) => {
               return (
                 <li key={recipe.id}>
                   <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-                  <button
+                  <Button
+                    variant="danger"
+                    size="sm"
                     onClick={(event) => {
                       const userRecipeToDelete = userRecipes.find(
                         (userRecipe) =>
@@ -135,7 +138,7 @@ export const GroceryList = ({ currentUser }) => {
                     }}
                   >
                     Delete
-                  </button>
+                  </Button>
                 </li>
               );
             })}
@@ -143,13 +146,14 @@ export const GroceryList = ({ currentUser }) => {
         </div>
       </section>
       <section>
-        <button
+        <Button
+          variant="success"
           onClick={() => {
             navigate("/recipes");
           }}
         >
           Add Recipes
-        </button>
+        </Button>
       </section>
     </div>
   );

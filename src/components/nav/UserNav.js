@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
+import Button from "react-bootstrap/Button";
 
 export const UserNav = () => {
   const navigate = useNavigate();
 
   return (
     <ul className="navbar">
-      <li>
+      <li className="nav-item">
         <Link to="/">
           <img
             src={process.env.PUBLIC_URL + "/images/Y’alldis_logo.png"}
@@ -17,6 +18,9 @@ export const UserNav = () => {
       </li>
       <li className="navbar-item">
         <Link to="/grocerylist">Grocery List</Link>
+      </li>
+      <li>
+        <Button>My Button</Button>
       </li>
       <li className="navbar-item">
         <Link to="/recipes">Recipes</Link>
