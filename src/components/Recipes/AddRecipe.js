@@ -58,7 +58,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
   };
 
   useEffect(() => {
-    if (searchIngredients !== "") {
+    if (searchIngredients) {
       const foundWords = ingredients.filter((ingredient) =>
         ingredient.name.toLowerCase().includes(searchIngredients.toLowerCase())
       );
@@ -67,27 +67,29 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
   }, [searchIngredients, ingredients]);
 
   return (
-    <div>
-      <section>
+    <div className="recipes-container">
+      <section className="recipes-header">
         <h1>Add Recipe Info: </h1>
       </section>
-      <section>
-        <div>
-          <h4>Title:</h4>
-          <input
+      <section className="add-recipe-inputs">
+        <div className="add-recipe-input-item add-recipe-input-item-title">
+          <h4 className="add-recipe-title">Title:</h4>
+          <textarea
             type="text"
             required
             placeholder="Enter Title"
+            className="input-box-title"
             onChange={(event) => {
               setTitle(event.target.value);
             }}
           />
         </div>
-        <div>
-          <h4>Meal Type:</h4>
+        <div className="add-recipe-input-item">
+          <h4 className="add-recipe-title">Meal Type:</h4>
           <select
             id="resource"
             required
+            className="input-box-meal-type"
             onChange={(event) => {
               const mealTypeText = event.target.value;
 
@@ -105,40 +107,43 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
           </select>
         </div>
         <div>
-          <h4>Image URL (Copy Image Address):</h4>
-          <input
+          <h4 className="add-recipe-title">Image URL (Copy Image Address):</h4>
+          <textarea
             type="text"
             required
             placeholder="Enter Image URL"
+            className="input-box-url"
             onChange={(event) => {
               setImgURL(event.target.value);
             }}
           />
         </div>
         <div>
-          <h4>Description:</h4>
-          <input
+          <h4 className="add-recipe-title">Description:</h4>
+          <textarea
             type="text"
             required
             placeholder="Enter Description"
+            className="input-box-description"
             onChange={(event) => {
               setDescription(event.target.value);
             }}
           />
         </div>
         <div>
-          <h4>Directions:</h4>
-          <input
+          <h4 className="add-recipe-title">Directions:</h4>
+          <textarea
             type="text"
             required
             placeholder="Enter Directions"
+            className="input-box-directions"
             onChange={(event) => {
               setDirections(event.target.value);
             }}
           />
         </div>
         <div>
-          <h4>Ingredients:</h4>
+          <h4 className="add-recipe-title">Ingredients:</h4>
           <input
             type="text"
             required
@@ -148,7 +153,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
             }}
           />
           <div>
-            <h4>Available Ingredients: </h4>
+            <h4 className="add-recipe-title">Available Ingredients: </h4>
             <ul>
               {filteredIngredients.map((ingredient) => {
                 return (
@@ -157,6 +162,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
                     <Button
                       variant="success"
                       size="sm"
+                      className="btn-add"
                       onClick={() => {
                         addIngredient(ingredient);
                       }}
@@ -169,7 +175,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
             </ul>
           </div>
           <div>
-            <h4>Added Ingredients: </h4>
+            <h4 className="add-recipe-title">Added Ingredients: </h4>
             <ul>
               {addedIngredients.map((ingredient) => {
                 return (
@@ -178,6 +184,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
                     <Button
                       variant="secondary"
                       size="sm"
+                      className="btn-delete"
                       onClick={() => {
                         console.log(addedIngredients);
                         const filteredArr = addedIngredients.filter(
@@ -195,7 +202,7 @@ export const AddRecipe = ({ ingredients, mealTypes }) => {
           </div>
         </div>
       </section>
-      <section>
+      <section className="btn-post-recipe">
         <Button variant="dark" onClick={handlePost}>
           Post Recipe
         </Button>

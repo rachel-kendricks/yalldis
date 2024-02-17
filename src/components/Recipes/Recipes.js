@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { getRecipes } from "../services/recipeService";
 import { Link } from "react-router-dom";
-import { getMealTypes } from "../services/mealTypeService";
 import Button from "react-bootstrap/Button";
+import "./Recipes.css";
 
 export const Recipes = ({ mealTypes, currentUser }) => {
   const [allRecipes, setAllRecipes] = useState([]);
-  // const [mealTypes, setMealTypes] = useState([]);
   const [filteredMealType, setFilteredMealType] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,12 +35,21 @@ export const Recipes = ({ mealTypes, currentUser }) => {
   }, [searchTerm, allRecipes]);
 
   return (
-    <div>
-      <section>
+    <div className="recipes-container">
+      <section className="recipes-header">
         <h1>Recipes</h1>
       </section>
-      <section>
-        <div>
+      <section className="recipe-filters">
+        <div className="recipe-filter-item">
+          <input
+            type="text"
+            placeholder="Search"
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+            }}
+          />
+        </div>
+        <div className="recipe-filter-item">
           <select
             id="resource"
             onChange={(event) => {
@@ -54,7 +62,7 @@ export const Recipes = ({ mealTypes, currentUser }) => {
             })}
           </select>
         </div>
-        <div>
+        <div className="recipe-filter-item">
           <Button
             variant="dark"
             onClick={() => {
@@ -64,30 +72,23 @@ export const Recipes = ({ mealTypes, currentUser }) => {
             Show All
           </Button>
         </div>
-        <div>
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-            }}
-          />
-        </div>
       </section>
       <section>
-        <div>
+        <div className="recipes-list">
           <ul>
             {filteredRecipes.map((recipe) => {
               return (
                 <Link to={`/recipes/${recipe.id}`} key={recipe.id}>
-                  <li key={recipe.id}>{recipe.title}</li>
+                  <li key={recipe.id} className="recipe-hover">
+                    {recipe.title}
+                  </li>
                 </Link>
               );
             })}
           </ul>
         </div>
       </section>
-      <section>
+      <section className="btn-add-new-recipe">
         {currentUser.isAdministrator ? (
           <Link to={`/addrecipe`}>
             <Button variant="success">Add New Recipe</Button>

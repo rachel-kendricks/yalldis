@@ -1,0 +1,24 @@
+.profile-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 2em;
+  /* border: red solid 2px; */
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-item {
+  display: flex;
+  margin: 2em;
+  /* margin-left: 3.5em; */
+}
+
+.profile-title {
+  margin-right: 0.3em;
+}
+
+/* .btn-update-profile {
+  justify-content: center;
+} */

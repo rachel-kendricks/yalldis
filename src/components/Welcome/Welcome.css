@@ -1,0 +1,10 @@
+.welcome-container {
+  max-width: 700px;
+  margin: auto;
+}
+
+.welcome-h1 {
+  text-align: center;
+  margin: 1.2em;
+  font-weight: 1000;
+}
