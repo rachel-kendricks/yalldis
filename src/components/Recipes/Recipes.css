@@ -1,0 +1,94 @@
+.recipes-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2em;
+  /* border: red solid 2px; */
+}
+
+.recipes-header {
+  text-align: center;
+}
+
+.recipe-filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-filter-item {
+  margin: 1em 4em 1em 0;
+}
+
+.btn-add-new-recipe {
+  text-align: center;
+  margin: 2em;
+}
+
+.recipe-img {
+  width: 40em;
+  margin: 0.7em;
+}
+
+.btn-post-recipe {
+  max-width: 125px;
+}
+
+.recipes-list {
+  display: inline-block;
+}
+
+.add-recipe-inputs,
+.btn-post-recipe,
+.edit-recipe-inputs,
+.edit-recipe-btns {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4.5em;
+}
+
+.add-recipe-input-item,
+.edit-recipe-input-item {
+  display: flex;
+}
+
+.input-box-url {
+  width: 500px;
+  height: 150px;
+}
+
+.input-box-description,
+.input-box-directions {
+  text-wrap: wrap;
+  width: 500px;
+  height: 150px;
+}
+
+.edit-recipe-search-ingredients {
+  max-width: 250px;
+}
+
+.input-box-title {
+  height: 30px;
+  width: 443px;
+}
+
+.input-box-meal-type {
+  height: 30px;
+}
+
+.add-recipe-title,
+.input-box-meal-type,
+.input-box-title,
+.edit-recipe-title {
+  margin-right: 0.3em;
+  margin-top: 0.7em;
+}
+
+.btn-update-recipe {
+  margin-bottom: 20px;
+}
+
+.btn-add,
+.btn-delete {
+  margin: 2px 3px;
+}

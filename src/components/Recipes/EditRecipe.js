@@ -108,17 +108,18 @@ export const EditRecipe = ({
   }, [searchIngredients, ingredients]);
 
   return (
-    <div>
-      <section>
+    <div className="recipes-container">
+      <section className="recipes-header">
         <h1>Edit Recipe</h1>
       </section>
-      <section>
-        <div>
-          <h4>Title:</h4>
+      <section className="edit-recipe-inputs">
+        <div className="edit-recipe-input-item">
+          <h4 className="edit-recipe-title">Title:</h4>
           <fieldset>
-            <input
+            <textarea
               type="text"
               value={recipe.title}
+              className="input-box-title"
               onChange={(event) => {
                 const copy = { ...recipe };
                 copy.title = event.target.value;
@@ -128,12 +129,13 @@ export const EditRecipe = ({
             />
           </fieldset>
         </div>
-        <div>
-          <h4>Meal Type:</h4>
+        <div className="edit-recipe-input-item">
+          <h4 className="edit-recipe-title">Meal Type:</h4>
           <select
             id="resource"
             required
             value={recipe.mealTypeId}
+            className="input-box-meal-type"
             onChange={(event) => {
               const copy = { ...recipe };
               const mealTypeText = event.target.value;
@@ -153,11 +155,12 @@ export const EditRecipe = ({
           </select>
         </div>
         <div>
-          <h4>Image URL (Copy Image Address):</h4>
+          <h4 className="edit-recipe-title">Image URL (Copy Image Address):</h4>
           <fieldset>
-            <input
+            <textarea
               type="text"
               value={recipe.image}
+              className="input-box-url"
               onChange={(event) => {
                 const copy = { ...recipe };
                 copy.image = event.target.value;
@@ -168,11 +171,12 @@ export const EditRecipe = ({
           </fieldset>
         </div>
         <div>
-          <h4>Description:</h4>
+          <h4 className="edit-recipe-title">Description:</h4>
           <fieldset>
-            <input
+            <textarea
               type="text"
               value={recipe.description}
+              className="input-box-description"
               onChange={(event) => {
                 const copy = { ...recipe };
                 copy.description = event.target.value;
@@ -183,11 +187,12 @@ export const EditRecipe = ({
           </fieldset>
         </div>
         <div>
-          <h4>Directions:</h4>
+          <h4 className="edit-recipe-title">Directions:</h4>
           <fieldset>
-            <input
+            <textarea
               type="text"
               value={recipe.instructions}
+              className="input-box-directions"
               onChange={(event) => {
                 const copy = { ...recipe };
                 copy.instructions = event.target.value;
@@ -198,18 +203,19 @@ export const EditRecipe = ({
           </fieldset>
         </div>
       </section>
-      <section>
-        <h4>Ingredients: </h4>
+      <section className="edit-recipe-inputs">
+        <h4 className="edit-recipe-title">Ingredients: </h4>
         <input
           type="text"
           required
           placeholder="Search Ingredients"
+          className="edit-recipe-search-ingredients"
           onChange={(event) => {
             setSearchIngredients(event.target.value);
           }}
         />
         <div>
-          <h4>Available Ingredients: </h4>
+          <h4 className="edit-recipe-title">Available Ingredients: </h4>
           <ul>
             {filteredIngredients.map((ingredient) => {
               return (
@@ -218,6 +224,7 @@ export const EditRecipe = ({
                   <Button
                     variant="success"
                     size="sm"
+                    className="btn-add"
                     onClick={() => {
                       addIngredient(ingredient);
                     }}
@@ -230,7 +237,7 @@ export const EditRecipe = ({
           </ul>
         </div>
         <div>
-          <h4>Added Ingredients: </h4>
+          <h4 className="edit-recipe-title">Added Ingredients: </h4>
           <ul>
             {addedIngredients?.map((ingredient) => {
               return (
@@ -239,6 +246,7 @@ export const EditRecipe = ({
                   <Button
                     variant="secondary"
                     size="sm"
+                    className="btn-delete"
                     onClick={() => {
                       console.log(addedIngredients);
                       const filteredArr = addedIngredients.filter(
@@ -255,20 +263,25 @@ export const EditRecipe = ({
           </ul>
         </div>
       </section>
-      <section>
-        <Button variant="dark" onClick={handleUpdateRecipe}>
-          Update Recipe
-        </Button>
-        <Button
-          variant="danger"
-          onClick={() => {
-            deleteRecipe(recipe.id);
-            window.alert("Recipe Deleted!");
-            navigate("/recipes");
-          }}
-        >
-          Delete Recipe
-        </Button>
+      <section className="edit-recipe-btns">
+        <div className="btn-update-recipe">
+          <Button variant="dark" onClick={handleUpdateRecipe}>
+            Update Recipe
+          </Button>
+        </div>
+        <div className="btn-delete-recipe">
+          <Button
+            variant="danger"
+            className="btn-delete-recipe"
+            onClick={() => {
+              deleteRecipe(recipe.id);
+              window.alert("Recipe Deleted!");
+              navigate("/recipes");
+            }}
+          >
+            Delete Recipe
+          </Button>
+        </div>
       </section>
     </div>
   );

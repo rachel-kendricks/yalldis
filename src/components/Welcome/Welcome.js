@@ -1,7 +1,11 @@
+import "./Welcome.css";
+
 export const Welcome = () => {
   return (
-    <>
-      <h1>Welcome to Y'alldis!</h1>
+    <div className="welcome-container">
+      <div className="header">
+        <h1 className="welcome-h1">Welcome to Y'alldis!</h1>
+      </div>
       <p>
         Are you tired of spending hours online looking at recipes? Do you always
         forget items on your grocery list, or find that those items are not
@@ -30,6 +34,6 @@ export const Welcome = () => {
       </p>
       <div></div>
       <p>Now, grocery shopping can be easy!</p>
-    </>
+    </div>
   );
 };

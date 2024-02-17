@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getUserById, updateUser } from "../services/userService";
 import { useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
+import "./Profile.css";
 
 export const Profile = ({ currentUser }) => {
   const [currentUserInfo, setCurrentUserInfo] = useState({});
@@ -30,11 +31,11 @@ export const Profile = ({ currentUser }) => {
   }, []);
 
   return (
-    <div>
+    <div className="profile-container">
       <section>
-        <h1>Profile</h1>
-        <div>
-          <h4>Name:</h4>
+        <h1 className="profile-header">Profile</h1>
+        <div className="profile-item">
+          <h4 className="profile-title">Name:</h4>
           <fieldset>
             <input
               type="text"
@@ -48,8 +49,8 @@ export const Profile = ({ currentUser }) => {
             />
           </fieldset>
         </div>
-        <div>
-          <h4>Email: </h4>
+        <div className="profile-item">
+          <h4 className="profile-title">Email: </h4>
           <fieldset>
             <input
               type="text"
@@ -63,7 +64,7 @@ export const Profile = ({ currentUser }) => {
             />
           </fieldset>
         </div>
-        <div>
+        <div className="profile-item">
           <fieldset>
             <div className="form-group">
               <label>
@@ -83,7 +84,7 @@ export const Profile = ({ currentUser }) => {
           </fieldset>
         </div>
       </section>
-      <section>
+      <section className="profile-item btn-update-profile">
         <Button variant="dark" onClick={handleUpdateProfile}>
           Update Profile
         </Button>

@@ -10,6 +10,7 @@ import { getIngredients } from "../services/ingredientsService";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import { PDFFile } from "../PDF/PDFFile";
 import Button from "react-bootstrap/Button";
+import "./GroceryList.css";
 
 export const GroceryList = ({ currentUser }) => {
   const [recipes, setRecipes] = useState([]);
@@ -89,9 +90,9 @@ export const GroceryList = ({ currentUser }) => {
   }, [recipes, ingredients, userRecipes]);
 
   return (
-    <div>
-      <section>
-        <h2>My Grocery List</h2>
+    <div className="grocery-list-container">
+      <section className="my-grocery-list">
+        <h1 className="grocery-list-title">My Grocery List</h1>
         <div>
           <ul>
             {groceryListIngredients.map((ingredient) => {
@@ -116,17 +117,18 @@ export const GroceryList = ({ currentUser }) => {
           </div>
         </div>
       </section>
-      <section>
-        <h2>My Recipes</h2>
-        <div>
+      <section className="my-recipes">
+        <h1 className="grocery-list-title">My Recipes</h1>
+        <div className="my-recipes-list">
           <ul>
             {recipes.map((recipe) => {
               return (
-                <li key={recipe.id}>
+                <li key={recipe.id} className="recipe-hover">
                   <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
                   <Button
                     variant="danger"
                     size="sm"
+                    className="dlt-button"
                     onClick={(event) => {
                       const userRecipeToDelete = userRecipes.find(
                         (userRecipe) =>
@@ -137,23 +139,23 @@ export const GroceryList = ({ currentUser }) => {
                       getAndSetUserRecipes();
                     }}
                   >
-                    Delete
+                    <i class="fa-solid fa-trash"></i>
                   </Button>
                 </li>
               );
             })}
           </ul>
         </div>
-      </section>
-      <section>
-        <Button
-          variant="success"
-          onClick={() => {
-            navigate("/recipes");
-          }}
-        >
-          Add Recipes
-        </Button>
+        <div>
+          <Button
+            variant="success"
+            onClick={() => {
+              navigate("/recipes");
+            }}
+          >
+            Add Recipes
+          </Button>
+        </div>
       </section>
     </div>
   );

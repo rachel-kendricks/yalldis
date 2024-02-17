@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
-import Button from "react-bootstrap/Button";
 
 export const AdministratorNav = () => {
   const navigate = useNavigate();
@@ -16,16 +15,7 @@ export const AdministratorNav = () => {
           />
         </Link>
       </div>
-      <ul className="nav nav-underline">
-        {/* <li className="nav-item">
-          <Link className="nav-link" href="#" to="/">
-            <img
-              src={process.env.PUBLIC_URL + "/images/Y’alldis_logo.png"}
-              alt="yalldis logo"
-              className="img-logo"
-            />
-          </Link>
-        </li> */}
+      <ul className="nav nav-underline nav-fill w-100 h-auto align-items-end">
         <li className="nav-item">
           <Link className="nav-link" href="#" to="/grocerylist">
             Grocery List

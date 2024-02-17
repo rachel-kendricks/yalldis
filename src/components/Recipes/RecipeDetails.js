@@ -31,33 +31,36 @@ export const RecipeDetails = ({
   };
 
   return (
-    <div>
+    <div className="recipes-container">
       <section>
-        <h1>Recipe Details</h1>
-        <div>
-          {" "}
-          <Button variant="success" onClick={handleAddToMyList}>
-            Add to My List
-          </Button>
+        <div className="recipes-header">
+          <h1>{recipe.title}</h1>
         </div>
-        {currentUser.isAdministrator ? (
-          <Button
-            variant="secondary"
-            onClick={() => {
-              navigate(`/recipes/${recipeId}/editrecipe`);
-            }}
-          >
-            Edit Recipe
-          </Button>
-        ) : (
-          ""
-        )}
+        <div className="recipe-filters">
+          <div className="recipe-filter-item">
+            <Button variant="success" onClick={handleAddToMyList}>
+              Add to My List
+            </Button>
+          </div>
+          <div className="recipe-filter-item">
+            {currentUser.isAdministrator ? (
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  navigate(`/recipes/${recipeId}/editrecipe`);
+                }}
+              >
+                Edit Recipe
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </section>
       <section>
-        <img src={recipe.image} alt={recipe.title} />
-        <div>
-          <h3>{recipe.title}</h3>
-        </div>
+        <img src={recipe.image} alt={recipe.title} className="recipe-img" />
+
         <div>
           <h3>Description:</h3>
           <p>{recipe.description}</p>
