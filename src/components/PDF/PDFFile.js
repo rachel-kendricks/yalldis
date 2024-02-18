@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-// import LogoImage from "../";
 
 const styles = StyleSheet.create({
   page: {
@@ -20,19 +19,19 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   title: {
-    fontSize: 24,
+    fontSize: 18,
     marginBottom: 7,
-    // textAlign: "center",
   },
   text: {
     marginLeft: 15,
     marginTop: 5,
-    fontSize: 14,
+    fontSize: 12,
     textAlign: "justify",
   },
   image: {
-    marginVertical: 15,
+    marginVertical: 3,
     marginHorizontal: 100,
+    maxWidth: 400,
   },
 });
 
@@ -43,7 +42,7 @@ export const PDFFile = ({ groceryListIngredients }) => {
         <View style={styles.section}>
           <Image
             style={styles.image}
-            src={process.env.PUBLIC_URL + "/images/Y’alldis_logo.png"}
+            src={process.env.PUBLIC_URL + "/images/Yalldis-logo-light.png"}
           />
           <Text style={styles.title}>My Grocery List:</Text>
           {groceryListIngredients.map((item) => (

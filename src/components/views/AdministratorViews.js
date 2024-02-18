@@ -6,6 +6,7 @@ import { Recipes } from "../Recipes/Recipes";
 import { Profile } from "../Profile/Profile";
 import { AddRecipe } from "../Recipes/AddRecipe";
 import { RecipeViews } from "./RecipeViews";
+import { Footer } from "../footer/Footer";
 
 export const AdministratorViews = ({ currentUser, ingredients, mealTypes }) => {
   return (
@@ -16,6 +17,7 @@ export const AdministratorViews = ({ currentUser, ingredients, mealTypes }) => {
           <>
             <AdministratorNav />
             <Outlet />
+            <Footer />
           </>
         }
       >
