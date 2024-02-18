@@ -1,5 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300&family=Signika:wght@300..700&display=swap");
+
+.signika-font-bold {
+  font-family: "Signika", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "GRAD" 0;
+}
+
 .img-logo {
-  width: 300px;
+  width: 350px;
   margin: 0.2em;
 }
 
@@ -13,10 +23,11 @@
 }
 
 .nav-item {
-  color: var(--offWhite);
+  color: #fefbf0;
+  font-size: 1.2em;
 }
 
 .nav-item a:hover,
 .nav-item a:focus {
-  color: lightgrey;
+  color: #30a69a;
 }

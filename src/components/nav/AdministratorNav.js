@@ -5,11 +5,11 @@ export const AdministratorNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="nav-container">
+    <div className="nav-container signika-font-bold">
       <div>
         <Link to="/">
           <img
-            src={process.env.PUBLIC_URL + "/images/Y’alldis_logo.png"}
+            src={process.env.PUBLIC_URL + "/images/Yalldis_logo.png"}
             alt="yalldis logo"
             className="img-logo"
           />

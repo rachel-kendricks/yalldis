@@ -1,5 +1,4 @@
-import { Outlet, Route, Routes, useParams } from "react-router-dom";
-import { AdministratorNav } from "../nav/AdministratorNav";
+import { Route, Routes, useParams } from "react-router-dom";
 import { RecipeDetails } from "../Recipes/RecipeDetails";
 import { EditRecipe } from "../Recipes/EditRecipe";
 import { useEffect, useState } from "react";

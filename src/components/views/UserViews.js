@@ -1,12 +1,11 @@
 import { Outlet, Route, Routes } from "react-router-dom";
-import { AdministratorNav } from "../nav/AdministratorNav";
 import { Welcome } from "../Welcome/Welcome";
 import { GroceryList } from "../GroceryList/GroceryList";
 import { Recipes } from "../Recipes/Recipes";
 import { Profile } from "../Profile/Profile";
-import { RecipeDetails } from "../Recipes/RecipeDetails";
 import { UserNav } from "../nav/UserNav";
 import { RecipeViews } from "./RecipeViews";
+import { Footer } from "../footer/Footer";
 
 export const UserViews = ({ currentUser, ingredients, mealTypes }) => {
   return (
@@ -17,6 +16,7 @@ export const UserViews = ({ currentUser, ingredients, mealTypes }) => {
           <>
             <UserNav />
             <Outlet />
+            <Footer />
           </>
         }
       >

@@ -91,72 +91,82 @@ export const GroceryList = ({ currentUser }) => {
 
   return (
     <div className="grocery-list-container">
-      <section className="my-grocery-list">
-        <h1 className="grocery-list-title">My Grocery List</h1>
-        <div>
-          <ul>
-            {groceryListIngredients.map((ingredient) => {
-              return <li key={ingredient.id}>{ingredient.name}</li>;
-            })}
-          </ul>
+      <div className="grocery-list-header"></div>
+      <div className="grocery-list-body">
+        <section className="my-grocery-list montserrat-font-light">
           <div>
-            <PDFDownloadLink
-              document={
-                <PDFFile groceryListIngredients={groceryListIngredients} />
-              }
-              fileName="My Grocery List"
-            >
-              {({ loading }) =>
-                loading ? (
-                  <Button variant="dark">Loading Document...</Button>
-                ) : (
-                  <Button variant="dark">Download PDF</Button>
-                )
-              }
-            </PDFDownloadLink>
+            <h2 className="grocery-list-title signika-font-bold">
+              My Grocery List
+            </h2>
           </div>
-        </div>
-      </section>
-      <section className="my-recipes">
-        <h1 className="grocery-list-title">My Recipes</h1>
-        <div className="my-recipes-list">
-          <ul>
-            {recipes.map((recipe) => {
-              return (
-                <li key={recipe.id} className="recipe-hover">
-                  <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-                  <Button
-                    variant="danger"
-                    size="sm"
-                    className="dlt-button"
-                    onClick={(event) => {
-                      const userRecipeToDelete = userRecipes.find(
-                        (userRecipe) =>
-                          userRecipe.userId === currentUser.id &&
-                          userRecipe.recipeId === recipe.id
-                      );
-                      deleteUserRecipe(userRecipeToDelete?.id);
-                      getAndSetUserRecipes();
-                    }}
-                  >
-                    <i class="fa-solid fa-trash"></i>
-                  </Button>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div>
-          <Button
-            variant="success"
-            onClick={() => {
-              navigate("/recipes");
-            }}
-          >
-            Add Recipes
-          </Button>
-        </div>
-      </section>
+          <div>
+            <ul>
+              {groceryListIngredients.map((ingredient) => {
+                return <li key={ingredient.id}>{ingredient.name}</li>;
+              })}
+            </ul>
+            <div>
+              <PDFDownloadLink
+                document={
+                  <PDFFile groceryListIngredients={groceryListIngredients} />
+                }
+                fileName="My Grocery List"
+              >
+                {({ loading }) =>
+                  loading ? (
+                    <Button variant="dark">Loading Document...</Button>
+                  ) : (
+                    <Button variant="dark" className="btn-download-pdf">
+                      Download PDF
+                    </Button>
+                  )
+                }
+              </PDFDownloadLink>
+            </div>
+          </div>
+        </section>
+        <section className="my-recipes montserrat-font-light">
+          <h2 className="grocery-list-title signika-font-bold">My Recipes</h2>
+          <div className="my-recipes-list">
+            <ul>
+              {recipes.map((recipe) => {
+                return (
+                  <li key={recipe.id} className="recipe-hover">
+                    <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+                    <Button
+                      variant="danger"
+                      size="sm"
+                      className="dlt-button"
+                      onClick={(event) => {
+                        const userRecipeToDelete = userRecipes.find(
+                          (userRecipe) =>
+                            userRecipe.userId === currentUser.id &&
+                            userRecipe.recipeId === recipe.id
+                        );
+                        deleteUserRecipe(userRecipeToDelete?.id);
+                        getAndSetUserRecipes();
+                      }}
+                    >
+                      <i class="fa-solid fa-trash"></i>
+                    </Button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <Button
+              variant="success"
+              className="btn-add-recipe"
+              onClick={() => {
+                navigate("/recipes");
+              }}
+            >
+              Add Recipes
+            </Button>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

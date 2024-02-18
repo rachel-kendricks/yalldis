@@ -1,24 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300&family=Signika:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300&family=Signika:wght@300..700&display=swap");
+
+.signika-font-bold {
+  font-family: "Signika", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "GRAD" 0;
+}
+
+.montserrat-font-light {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: light;
+}
+
 .profile-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 2em;
-  /* border: red solid 2px; */
+  background-color: #fefbf0;
+  position: relative;
+}
+
+.profile-container::after {
+  content: "";
+  display: block;
+  height: 200px; /* Set same as footer's height */
 }
 
 .profile-header {
-  text-align: center;
+  background-color: #30a69a;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-body {
+  max-width: 500px;
+  margin: auto;
+  padding: 2em;
 }
 
 .profile-item {
   display: flex;
   margin: 2em;
-  /* margin-left: 3.5em; */
+  margin-left: 3.5em;
+}
+
+.profile-h1 {
+  color: #3b3b3b;
+  text-shadow: 1px 1px 2px #fefbf0;
 }
 
 .profile-title {
-  margin-right: 0.3em;
+  margin-right: 0.2em;
 }
 
-/* .btn-update-profile {
-  justify-content: center;
-} */
+.btn-update {
+  width: fit-content;
+  background-color: #3b3b3b !important;
+}

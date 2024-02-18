@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300&family=Signika:wght@300..700&display=swap");
+
+.montserrat-font-light {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: light;
+}
+
+footer {
+  height: 135px;
+  background-color: #c96725;
+  text-align: center;
+  padding: 1em 0;
+  color: #fefbf0;
+  text-shadow: 0.5px 0.5px 0.5px #3b3b3b;
+  border-top: 1.25em solid #3b3b3b;
+  font-size: 1em;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
