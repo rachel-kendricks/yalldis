@@ -1,70 +1,76 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Y'alldis - Groceries Made Easy
 
-## Available Scripts
+Y'alldis is a grocery store that aimes to create an easy and enjoyable shopping experience. Y'alldis has an easy to use web application that allows users to browse recipes and generate a grocery list. When logged in as a user, you can browse through chef curated recipes and choose your favorites. A grocery list containing the recipe ingredients will automatically be generated. After choosing all the desired recipes, a user can downloaded a PDF of their grocery list. Then, the user can bring this list to the Y'alldis storefront to easily complete their shopping. When logged in as an administrator, the administrator has additional capabilities such as the ability to add recipes, edit recipes, and delete recipes. 
 
-In the project directory, you can run:
+### User Features
 
-### `npm start`
+* users can browse recipes and recipe details
+* users can add recipes to their list, which will automatically generate a grocery list from the recipe ingredients
+* users can remove recipes from their list, which will automatically remove the associated ingredients from the grocery list
+* users can download a PDF of their grocery list
+* users can update their profile information
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Administrator Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+*Note: An administrator can utilize all the same features as a user plus these extra features:*
 
-### `npm test`
+* administrators can add a new recipe
+* administrators can edit a recipe
+* administrators can delete a recipe
+## Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Running The Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### To deploy this project you will first need to access the database using JSON server. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. Install JSON Server.
+```bash
+npm i json-server
+```
 
-## Learn More
+2. Clone the database repository and navigate to that directory in the terminal.
+```bash
+git clone git@github.com:rachel-kendricks/yalldis-api.git
+cd yalldis-api
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+3. Run the server.
+```bash
+json-server -p 8088 database.json
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+#### Now, you can run the application. 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Open a new tab in the termainal (cmd t).
 
-### Analyzing the Bundle Size
+2. Clone the database repository and navigate to that directory in the terminal.
+```bash
+git clone git@github.com:rachel-kendricks/yalldis.git
+cd yalldis
+```
+3. Launch the client.
+```bash
+npm install
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Authors
 
-### Advanced Configuration
+- [@rachel-kendricks](https://github.com/rachel-kendricks)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
