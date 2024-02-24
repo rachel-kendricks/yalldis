@@ -64,7 +64,6 @@ export const GroceryList = ({ currentUser }) => {
     }
     console.log(ingredientsArr);
 
-    //rewrite this code******
     const uniqueItemsArray = ingredientsArr.filter((item, index, self) => {
       // Check if the item's id is the first occurrence in the array
       return index === self.findIndex((t) => t.id === item.id);
